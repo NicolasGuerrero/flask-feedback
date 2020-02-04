@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Register New User{% endblock %}
+{% block title %}Log in{% endblock %}
 
 {% block content %}
-<h1>Register New User</h1>
-
+<h1>Log in</h1>
 <form method='POST'>
   {{ form.hidden_tag() }}
+
   {% for field in form 
     if field.widget.input_type != 'hidden' %}
   <p>
@@ -18,7 +18,7 @@
     {% endfor %}
   </p>
   {% endfor %}
-  <button type='submit'>Register</button>
+  <button type='submit'>Log in</button>
 </form>
 
 
