@@ -4,7 +4,11 @@
 
 {% block content %}
 <h1>{{ user.username}}'s profile</h1>
-
+{% if user.username == session["username"] %} 
+<form action="/users/{{ user.username }}/delete" method="POST">
+  <button class= "btn btn-danger">Delete</button>
+</form>
+{% endif %}
 <div class="card" style="width: 18rem;">
   
   <div class="card-body">
@@ -13,5 +17,25 @@
   </div>
 </div>
 
+<div class="feedback_container">
+  <h3>Feedback</h3>
+  <ul>
+  {% for f in feedback %}
+      <li>
+        <h6><a href="/feedback/{{ f.id }}/update">{{ f.title }}</a></h6>
+        <p>{{ f.content }}</p>
+        {% if user.username == session["username"] %}
+        <form method="POST" action="/feedback/{{ f.id }}/delete">
+        <button>Delete</button>
+        </form>
+        
+        {% endif %}
+      </li>
+  {% endfor %}
+  </ul>
+  {% if user.username == session["username"] %} 
+  <a class="btn btn-primary" href="/users/{{ user.username }}/feedback/add" role="button">Add Feedback</a>
+  {% endif %}
+</div>
 
 {% endblock %}

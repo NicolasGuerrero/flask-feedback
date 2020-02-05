@@ -66,3 +66,10 @@ class Feedback(db.Model):
             db.ForeignKey("users.username")
     )
 
+    @classmethod
+    def get_user_feedback(cls, username):
+        """Obtain a user's feedback """
+
+        feedback_list = Feedback.query.filter_by(username=username).all()
+
+        return feedback_list
